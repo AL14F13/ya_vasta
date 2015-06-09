@@ -1,0 +1,11 @@
+@charset "utf-8";
+/* CSS Document */
+.cuadro
+{
+	width:50%;
+	float:left;
+}
+.pulsado
+{
+	background:-webkit-gradient(linear,80% 20%, 10% 20%,from(#FFF),to(#FFF));
+}
