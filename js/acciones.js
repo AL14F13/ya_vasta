@@ -1,7 +1,8 @@
 // JavaScript Document
 $(document).ready(function(e) {
 document.addEventListener("deviceready",function(){
-	var basedatos= window.sqlitePlugin.openDatabase({name: "coloresBD.db",createFromLocation:1})
+	var basedatos= window.sqlitePlugin.openDatabase({name: "coloresBD.db",createFromLocation:1});
+	cargarnombrejugador();
 	audio=window.plugins.LowLatencyAudio;
 	audio.preloadFX('b1','audio/C.mp3',function(){},function(msg){alert("Error "+msg);});
 	audio.preloadFX('b2','audio/D.mp3',function(){},function(msg){alert("Error "+msg);});
@@ -22,22 +23,23 @@ document.addEventListener("deviceready",function(){
 		
 	});
 	
-	$('.cuadro').on('vmousedown',function(){
-			$(this).addClass('pulsado');
-		});
-		$('.cuadro').on('vmouseup',function(){
-			$(this).removeClass('pulsado');
-		});
-		function quien(q)
-		{
-			audio.play(q);
-			return q.substring(1);
-		}
-		$('.cuadro').on('vmousedown',function(){
-			$('#pantalla').append(quien($(this).attr('id')));
-			$(this).addClass('pulsado');
+	//$('.cuadro').on('vmousedown',function(){
+			//$(this).addClass('pulsado');
+		//});
+		//$('.cuadro').on('vmouseup',function(){
+			//$(this).removeClass('pulsado');
+		//});
+		//function quien(q)
+		//{
+			//audio.play(q);
+			//return q.substring(1);
+		//}
+		
+		//$('.cuadro').on('vmousedown',function(){
+		//	$('#pantalla').append(quien($(this).attr('id')));
+			//$(this).addClass('pulsado');
 			
-		});
+		//});
 		
 		
 		function cargarnombrejugador()
@@ -45,12 +47,12 @@ document.addEventListener("deviceready",function(){
 		 basedatos.transaction(function(ejecutar){
 		 var sql="SELECT NombreUsuario FROM Usuario";
 		 ejecutar.executeSql(sql,undefined,function(ejecutar,resultado){
-		 var datosjugardor=resultado.row.item(0);
+		 var datosjugador=resultado.rows.item(0);
 		 $('#jugador').text(datosJugador.NombreUsuario); 
 			 
 		 });
 		 });
-		 cargarnombrejugador();
+		 
 		 
 		}
 		
@@ -66,6 +68,28 @@ document.addEventListener("deviceready",function(){
 	   });	   
 	   });		
 	  cargarnombrejugador();   //así se manda a llamar a nuestras funciones
+	  
+	  
+	  
+	  function flash(boton)
+	  {
+		  boton.stop().animate({opacity:'0.5'},{
+		 duracion:80,
+		 complete:function(){
+			 boton.stop().animate({opacity:'1'},200);
+		 }
+		 			
+         }); 
+	    
+		 }
+		 
+		 $('.cuadro').on('tap',function(){
+			 flash($(this));
+			 audio.play($(this).attr('id'));
+		});
+	 
+			  
+	 
 			
 }); 
 });
