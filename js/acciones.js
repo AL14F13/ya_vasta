@@ -29,7 +29,7 @@ document.addEventListener("deviceready",function(){
 		//$('.cuadro').on('vmouseup',function(){
 			//$(this).removeClass('pulsado');
 		//});
-		//function quien(q)
+		//function quien(q)i
 		//{
 			//audio.play(q);
 			//return q.substring(1);
@@ -47,7 +47,7 @@ document.addEventListener("deviceready",function(){
 		 basedatos.transaction(function(ejecutar){
 		 var sql="SELECT NombreUsuario FROM Usuario";
 		 ejecutar.executeSql(sql,undefined,function(ejecutar,resultado){
-		 var datosjugador=resultado.rows.item(0);
+		 var datosJugador=resultado.rows.item(0);
 		 $('#jugador').text(datosJugador.NombreUsuario); 
 			 
 		 });
